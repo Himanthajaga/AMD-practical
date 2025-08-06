@@ -1,8 +1,14 @@
 import { router } from "expo-router";
 import React from "react";
+import { useAuth } from "@/context/AuthContext";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
+const Login = () => {
+    const { isUser,login,logout } = useAuth()
+    const handleLogin = () => {
+        // Handle login logic here
+        Login()
+    }
 
-export default function Login() {
   return (
     <View
       style={{
@@ -47,43 +53,20 @@ export default function Login() {
         </Text>
 
         <TextInput
-          placeholder="Email"
-          style={{
-            marginBottom: 15,
-            padding: 12,
-            backgroundColor: "#f5f5f5",
-            color: "black",
-            borderRadius: 5,
-            width: "100%",
-            borderWidth: 1,
-            borderColor: "#ddd",
-          }}
+          placeholder="username"
+          placeholderTextColor={"#9ca3f"}
+          className="2-full p-3 bg-gray-200 text-black rounded-md mb-4"
         />
         <TextInput
-          placeholder="Password"
+                  placeholder="Password"
+                  placeholderTextColor={"#9ca3f"}
+          className="2-full p-3 bg-gray-200 text-black rounded-md mb-4"
           secureTextEntry={true}
-          style={{
-            marginBottom: 20,
-            padding: 12,
-            backgroundColor: "#f5f5f5",
-            color: "black",
-            borderRadius: 5,
-            width: "100%",
-            borderWidth: 1,
-            borderColor: "#ddd",
-          }}
         />
 
-        <TouchableOpacity
+              <TouchableOpacity
+                  className="bg-red-500 p-3 rounded-md mb-4 w-full flex-row items-center justify-center"
           onPress={() => router.push("/")}
-          style={{
-            marginBottom: 10,
-            padding: 12,
-            backgroundColor: "green",
-            borderRadius: 5,
-            width: "100%",
-            alignItems: "center",
-          }}
         >
           <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
             Login
