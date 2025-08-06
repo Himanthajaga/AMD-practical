@@ -1,12 +1,18 @@
-import { router } from "expo-router";
-import React from "react";
+import { router, useRouter } from "expo-router";
+import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 const Login = () => {
+    const [username,setuserName]  = useState("");
+    const [password,setPassword]  = useState("");
     const { isUser,login,logout } = useAuth()
+
+    const router = useRouter();
     const handleLogin = () => {
-        // Handle login logic here
-        Login()
+        if (username === "admin" && password === "1234") {
+            login();
+            router.replace("/");
+        }
     }
 
   return (
@@ -53,24 +59,28 @@ const Login = () => {
         </Text>
 
         <TextInput
-          placeholder="username"
-          placeholderTextColor={"#9ca3f"}
-          className="2-full p-3 bg-gray-200 text-black rounded-md mb-4"
+                  placeholder="username"
+                  placeholderTextColor={"#9ca3f"}
+                  className="2-full p-3 bg-blue-200 text-black rounded-md mb-4"
+                  value={username}
+                  onChangeText={ setuserName}
         />
         <TextInput
-                  placeholder="Password"
-                  placeholderTextColor={"#9ca3f"}
-          className="2-full p-3 bg-gray-200 text-black rounded-md mb-4"
-          secureTextEntry={true}
+          placeholder="Password"
+          placeholderTextColor={"#9ca3f"}
+          className="2-full p-3 bg-blue-200 text-black rounded-md mb-4"
+                  secureTextEntry={true}
+                  value={password}
+                    onChangeText={ setPassword}
         />
 
               <TouchableOpacity
                   className="bg-red-500 p-3 rounded-md mb-4 w-full flex-row items-center justify-center"
-          onPress={() => router.push("/")}
-        >
-          <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-            Login
-          </Text>
+                  onPress={handleLogin}
+              >
+                  <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
+                      Login
+                  </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -90,3 +100,4 @@ const Login = () => {
     </View>
   );
 }
+export default Login;
